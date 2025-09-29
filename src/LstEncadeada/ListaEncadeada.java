@@ -77,12 +77,12 @@ public class ListaEncadeada<T> {
         this.quantidade++;
     }
 
-    // Método para buscar um elemento (retorna boolean) [cite: 476]
+    // Método para buscar um elemento (retorna boolean)
     public boolean contemElemento(T elem) {
         return pesquisar(elem) != null;
     }
 
-    // Método para buscar um elemento (retorna o elemento) [cite: 477]
+    // Método para buscar um elemento (retorna o elemento)
     public T pesquisar(T elem) {
         No<T> aux = this.prim;
         while (aux != null) {
@@ -98,7 +98,7 @@ public class ListaEncadeada<T> {
         return null; // Não encontrou
     }
 
-    // Método para remover um elemento [cite: 480]
+    // Método para remover um elemento 
     public T removeElemento(T elem) {
         No<T> aux = this.prim;
         No<T> ant = null;
