@@ -11,7 +11,7 @@ import java.util.List;
 
 public class LeitorArquivos {
     private static final String NOME_ARQUIVO = "alunosBalanceados.txt";
-    
+
     public static void main(String[] args) {
         List<Aluno> arrayList = new ArrayList<>();
         List<Aluno> linkedList = new LinkedList<>();
@@ -48,77 +48,113 @@ public class LeitorArquivos {
         int tamanho = arrayList.size();
         int posicaoMeio = tamanho / 2;
 
+        // --- Variáveis para armazenar os resultados dos testes ---
+        long arrayListInsertFim, linkedListInsertFim;
+        long arrayListInsertInicio, linkedListInsertInicio;
+        long arrayListInsertMeio, linkedListInsertMeio;
+        long arrayListBuscaUltimo, linkedListBuscaUltimo;
+        long arrayListBuscaPenultimo, linkedListBuscaPenultimo;
+        long arrayListBuscaMeio, linkedListBuscaMeio;
+
         // --- TESTES DE INSERÇÃO ---
-        System.out.println("--- Testes de Inserção ---");
+        System.out.println("Executando testes de inserção e busca...");
 
         // Inserção no Fim
         startTime = System.currentTimeMillis();
         arrayList.add(novoAluno);
         endTime = System.currentTimeMillis();
-        System.out.println("ArrayList - Inserção no Fim: " + (endTime - startTime) + " ms");
+        arrayListInsertFim = endTime - startTime;
 
         startTime = System.currentTimeMillis();
         linkedList.add(novoAluno);
         endTime = System.currentTimeMillis();
-        System.out.println("LinkedList - Inserção no Fim: " + (endTime - startTime) + " ms\n");
+        linkedListInsertFim = endTime - startTime;
 
         // Inserção no Início (posição 0)
         startTime = System.currentTimeMillis();
         arrayList.add(0, novoAluno);
         endTime = System.currentTimeMillis();
-        System.out.println("ArrayList - Inserção no Início: " + (endTime - startTime) + " ms");
+        arrayListInsertInicio = endTime - startTime;
 
         startTime = System.currentTimeMillis();
         linkedList.add(0, novoAluno);
         endTime = System.currentTimeMillis();
-        System.out.println("LinkedList - Inserção no Início: " + (endTime - startTime) + " ms\n");
+        linkedListInsertInicio = endTime - startTime;
 
         // Inserção no Meio
         startTime = System.currentTimeMillis();
         arrayList.add(posicaoMeio, novoAluno);
         endTime = System.currentTimeMillis();
-        System.out.println("ArrayList - Inserção no Meio: " + (endTime - startTime) + " ms");
+        arrayListInsertMeio = endTime - startTime;
 
         startTime = System.currentTimeMillis();
         linkedList.add(posicaoMeio, novoAluno);
         endTime = System.currentTimeMillis();
-        System.out.println("LinkedList - Inserção no Meio: " + (endTime - startTime) + " ms\n");
+        linkedListInsertMeio = endTime - startTime;
 
 
         // --- TESTES DE BUSCA ---
-        System.out.println("--- Testes de Busca por Índice ---");
-
         // Busca do Último Elemento
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime();
         arrayList.get(tamanho - 1);
-        endTime = System.currentTimeMillis();
-        System.out.println("ArrayList - Busca do Último: " + (endTime - startTime) + " ms");
+        endTime = System.nanoTime();
+        arrayListBuscaUltimo = endTime - startTime;
 
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime();
         linkedList.get(tamanho - 1);
-        endTime = System.currentTimeMillis();
-        System.out.println("LinkedList - Busca do Último: " + (endTime - startTime) + " ms\n");
+        endTime = System.nanoTime();
+        linkedListBuscaUltimo = endTime - startTime;
 
         // Busca do Penúltimo Elemento
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime();
         arrayList.get(tamanho - 2);
-        endTime = System.currentTimeMillis();
-        System.out.println("ArrayList - Busca do Penúltimo: " + (endTime - startTime) + " ms");
+        endTime = System.nanoTime();
+        arrayListBuscaPenultimo = endTime - startTime;
 
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime();
         linkedList.get(tamanho - 2);
-        endTime = System.currentTimeMillis();
-        System.out.println("LinkedList - Busca do Penúltimo: " + (endTime - startTime) + " ms\n");
+        endTime = System.nanoTime();
+        linkedListBuscaPenultimo = endTime - startTime;
 
         // Busca do Elemento do Meio
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime();
         arrayList.get(posicaoMeio);
-        endTime = System.currentTimeMillis();
-        System.out.println("ArrayList - Busca do Meio: " + (endTime - startTime) + " ms");
+        endTime = System.nanoTime();
+        arrayListBuscaMeio = endTime - startTime;
 
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime();
         linkedList.get(posicaoMeio);
-        endTime = System.currentTimeMillis();
-        System.out.println("LinkedList - Busca do Meio: " + (endTime - startTime) + " ms\n");
+        endTime = System.nanoTime();
+        linkedListBuscaMeio = endTime - startTime;
+
+        System.out.println("Testes concluídos.\n");
+        System.out.println("Tamanho da lista: \n" + tamanho);
+
+        // --- Exibição dos resultados em formato de tabela ---
+        String linhaSeparadora = "+-------------------------+---------------+--------------+";
+        String cabecalho = "| Operação                | ArrayList (ns)| LinkedList (ns)|";
+
+        System.out.println(linhaSeparadora);
+        System.out.println(cabecalho);
+        System.out.println(linhaSeparadora);
+
+        // Formato da linha: %-25s para uma string de 25 caracteres alinhada à esquerda
+        //                   %15d para um número de 15 caracteres alinhado à direita
+        //                   %n para uma nova linha
+        String formatoLinha = "| %-23s | %13d | %12d |%n";
+
+        // Inserções
+        System.out.printf(formatoLinha, "Inserção no Fim", arrayListInsertFim, linkedListInsertFim);
+        System.out.printf(formatoLinha, "Inserção no Início", arrayListInsertInicio, linkedListInsertInicio);
+        System.out.printf(formatoLinha, "Inserção no Meio", arrayListInsertMeio, linkedListInsertMeio);
+
+        System.out.println(linhaSeparadora);
+
+        // Buscas
+        System.out.printf(formatoLinha, "Busca do Último", arrayListBuscaUltimo, linkedListBuscaUltimo);
+        System.out.printf(formatoLinha, "Busca do Penúltimo", arrayListBuscaPenultimo, linkedListBuscaPenultimo);
+        System.out.printf(formatoLinha, "Busca do Meio", arrayListBuscaMeio, linkedListBuscaMeio);
+
+        System.out.println(linhaSeparadora);
     }
 }

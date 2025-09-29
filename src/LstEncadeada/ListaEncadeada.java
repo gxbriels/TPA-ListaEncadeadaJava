@@ -25,7 +25,7 @@ public class ListaEncadeada<T> {
         return quantidade;
     }
 
-    // Método principal de inserção [cite: 475]
+    // Método principal de inserção
     public void inserirElemento(T elem) {
         if (!this.ordenada) {
             inserirElementoNaoOrd(elem);
@@ -57,7 +57,7 @@ public class ListaEncadeada<T> {
         if (this.prim == null) {
             this.prim = this.ult = novo;
         } else {
-            // Percorre a lista para encontrar a posição de inserção [cite: 277, 405]
+            // Percorre a lista para encontrar a posição de inserção
             while (atual != null && this.comparador.compare(atual.getValor(), elem) < 0) {
                 ant = atual;
                 atual = atual.getProx();
@@ -91,7 +91,7 @@ public class ListaEncadeada<T> {
                 return aux.getValor(); // Encontrou o elemento
             }
             if (this.ordenada && comparacao > 0) {
-                return null; // Otimização para lista ordenada: valor é maior, não há mais chance de encontrar [cite: 479]
+                return null; // Otimização para lista ordenada: valor é maior, não há mais chance de encontrar
             }
             aux = aux.getProx();
         }
@@ -110,19 +110,19 @@ public class ListaEncadeada<T> {
                 if (ant == null) { // Remove o primeiro elemento
                     this.prim = this.prim.getProx();
                     if (this.prim == null) {
-                        this.ult = null; // Era o único elemento na lista [cite: 97]
+                        this.ult = null; // Era o único elemento na lista
                     }
                 } else { // Remove um elemento no meio ou no final
                     ant.setProx(aux.getProx());
                     if (aux == this.ult) {
-                        this.ult = ant; // Removeu o último elemento [cite: 118]
+                        this.ult = ant; // Removeu o último elemento
                     }
                 }
                 this.quantidade--;
                 return valorRemovido;
             }
             if (this.ordenada && comparacao > 0) {
-                return null; // Otimização para lista ordenada: valor é maior, não há mais chance de encontrar [cite: 482]
+                return null; // Otimização para lista ordenada: valor é maior, não há mais chance de encontrar
             }
             ant = aux;
             aux = aux.getProx();
@@ -130,7 +130,7 @@ public class ListaEncadeada<T> {
         return null; // Elemento não encontrado
     }
 
-    // Método toString para exibir o conteúdo da lista [cite: 134]
+    // Método toString para exibir o conteúdo da lista
     @Override
     public String toString() {
         No<T> aux = this.prim;
